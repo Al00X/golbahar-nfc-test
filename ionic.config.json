@@ -1,0 +1,7 @@
+{
+  "name": "golbahar-nfc-test",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

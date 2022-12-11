@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Scan and Fill!
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div *ngIf="{isScanning: isScanning$ | async} as state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 2rem">
+    <ion-button (click)="onScanNFC()" [disabled]="state.isScanning">{{state.isScanning ? 'Scanning' : 'Scan with NFC'}}</ion-button>
+  </div>
+  <form autocomplete="off" style="display: flex; flex-direction: column; gap: 1rem; width: 100%; padding: 1rem 0.25rem 0">
+    <ng-container *ngFor="let item of currentInputs">
+      <ion-item>
+        <ion-label position="fixed">{{item.name}}</ion-label>
+        <ion-input autocomplete="off" [placeholder]="item.name" [type]="item.type"></ion-input>
+      </ion-item>
+    </ng-container>
+  </form>
+</ion-content>

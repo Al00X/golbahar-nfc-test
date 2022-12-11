@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">golbahar-nfc-test</string>
+    <string name="title_activity_main">golbahar-nfc-test</string>
+    <string name="package_name">com.golbahar.test.app</string>
+    <string name="custom_url_scheme">com.golbahar.test.app</string>
+</resources>
