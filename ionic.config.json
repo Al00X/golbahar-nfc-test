@@ -1,7 +1,8 @@
 {
   "name": "golbahar-nfc-test",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

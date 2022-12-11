@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.golbahar.test.app',
+  appId: 'io.ionic.starter',
   appName: 'golbahar-nfc-test',
   webDir: 'www',
   bundledWebRuntime: false,
