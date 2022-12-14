@@ -4,6 +4,7 @@ import {SqliteComponent} from "./sqlite/sqlite.component";
 import {CameraComponent} from "./camera/camera.component";
 import {GeoComponent} from "./geo/geo.component";
 import {FileComponent} from "./file/file.component";
+import {PreferencesComponent} from "./preferences/preferences.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'files',
     component: FileComponent
+  },
+  {
+    path: 'preferences',
+    component: PreferencesComponent
   }
 ];
 @NgModule({

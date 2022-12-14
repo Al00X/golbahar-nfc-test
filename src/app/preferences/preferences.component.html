@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Save your settings!
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input [formControl]="control" placeholder="Enter Your Name"></ion-input>
+  </ion-item>
+  <div class="centered-div mt-8">
+    <ion-button (click)="save()">Save</ion-button>
+    <p *ngIf="saved" class="mt-8">Saved</p>
+  </div>
+</ion-content>
