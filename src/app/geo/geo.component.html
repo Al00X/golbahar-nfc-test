@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Get loc
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="centered-div mt-8">
+    <ion-button [disabled]="loading" (click)="getLocation()">Get my location</ion-button>
+  </div>
+  <p *ngIf="currentPosition" class="mt-8">lat: {{ currentPosition.coords.latitude }} - lng: {{currentPosition.coords.longitude}}</p>
+</ion-content>

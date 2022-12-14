@@ -10,9 +10,10 @@ import {Ndef, NFC} from '@awesome-cordova-plugins/nfc/ngx';
 import { SqliteComponent } from './sqlite/sqlite.component';
 import {SQLiteService} from "./services/sqlite.service";
 import { CameraComponent } from './camera/camera.component';
+import { GeoComponent } from './geo/geo.component';
 
 @NgModule({
-  declarations: [AppComponent, SqliteComponent, CameraComponent],
+  declarations: [AppComponent, SqliteComponent, CameraComponent, GeoComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

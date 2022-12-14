@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {SqliteComponent} from "./sqlite/sqlite.component";
 import {CameraComponent} from "./camera/camera.component";
+import {GeoComponent} from "./geo/geo.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'camera',
     component: CameraComponent
+  },
+  {
+    path: 'geo',
+    component: GeoComponent
   }
 ];
 @NgModule({
