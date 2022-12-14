@@ -11,9 +11,10 @@ import { SqliteComponent } from './sqlite/sqlite.component';
 import {SQLiteService} from "./services/sqlite.service";
 import { CameraComponent } from './camera/camera.component';
 import { GeoComponent } from './geo/geo.component';
+import { FileComponent } from './file/file.component';
 
 @NgModule({
-  declarations: [AppComponent, SqliteComponent, CameraComponent, GeoComponent],
+  declarations: [AppComponent, SqliteComponent, CameraComponent, GeoComponent, FileComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
