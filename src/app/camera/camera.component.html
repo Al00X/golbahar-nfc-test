@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Cam
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="centered-div mt-8">
+    <ion-button (click)="takePicture()">Take a pic!</ion-button>
+  </div>
+  <img #Preview class="mt-8" style="width: 100%; height: auto" />
+</ion-content>
