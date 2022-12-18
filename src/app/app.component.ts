@@ -12,6 +12,7 @@ export class AppComponent {
   public sqliteLoaded = false;
   constructor(private platform: Platform, private sqlite: SQLiteService) {
     this.initializeApp();
+    // this.sqliteLoaded = true;
   }
 
   initializeApp() {
@@ -23,15 +24,18 @@ export class AppComponent {
           const jeepSqliteEl = document.querySelector('jeep-sqlite');
           if (jeepSqliteEl != null) {
             await this.sqlite.initWebStore();
-            this.sqliteLoaded = true;
             console.log(`>>>> isStoreOpen ${await jeepSqliteEl.isStoreOpen()}`);
           } else {
             console.log('>>>> jeepSqliteEl is null');
           }
         }
-
+        this.sqliteLoaded = true;
         console.log(`>>>> in App  this.initPlugin ${ret}`);
+      }).catch((err) => {
+        console.error('Sqlite Init failed:', err);
       });
+    }).catch((err) => {
+      console.error('Platform failed to ready up (app.component)', err);
     });
   }
 }
