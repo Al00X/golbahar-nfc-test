@@ -3,12 +3,60 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Use Sqlite!
-    </ion-title>
+    <ion-title> Use Sqlite! </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  
+  <div *ngIf="databaseIsReady; else DatabaseLoading">
+    <table>
+      <thead>
+        <tr>
+          <td class="tg-0lax">ID</td>
+          <td class="tg-0lax">Firstname</td>
+          <td class="tg-0lax">Lastname</td>
+          <td class="tg-0lax">Age</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of currentData$ | async">
+          <td>{{ i.id }}</td>
+          <td>{{ i.firstname }}</td>
+          <td>{{ i.lastname }}</td>
+          <td>{{ i.age }}</td>
+          <td>
+            <ion-button (click)="onDeleteEntry(i.id)">DEL</ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <form class="mt-8 centered-div" style="gap: 1rem" autocomplete="off">
+    <ion-item>
+      <ion-label>Firstname</ion-label>
+      <ion-input
+        [formControl]="form.controls.firstname"
+        autocomplete="off"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Lastname</ion-label>
+      <ion-input
+        [formControl]="form.controls.lastname"
+        autocomplete="off"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Age</ion-label>
+      <ion-input [formControl]="form.controls.age" type="number"></ion-input>
+    </ion-item>
+    <ion-button [disabled]="saving" (click)="onSaveEntry()" class="mt-8"
+      >Save</ion-button
+    >
+  </form>
 </ion-content>
+
+<ng-template #DatabaseLoading>
+  <div class="centered-div">Sqlite is loading...</div>
+</ng-template>

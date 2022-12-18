@@ -1,0 +1,18 @@
+table {
+  width: 100%;
+  text-align: center;
+
+  thead > tr {
+    background-color: #1c1c1d;
+    td {
+      padding: 0.75rem 0.25rem;
+    }
+  }
+  tbody > tr {
+    background-color: #555;
+    border: 1px solid black;
+    td {
+      padding: 0.25rem;
+    }
+  }
+}

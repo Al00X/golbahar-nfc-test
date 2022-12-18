@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SQLiteService } from './services/sqlite.service';
 import { Platform } from '@ionic/angular';
+import {SqliteWrapperService} from "./services/sqlite.wrapper.service";
 
 @Component({
   selector: 'app-root',
@@ -10,20 +11,27 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
   public isWeb: boolean = false;
   public sqliteLoaded = false;
-  constructor(private platform: Platform, private sqlite: SQLiteService) {
-    this.initializeApp();
+  DATABASE_NAME = 'test';
+
+  constructor(private platform: Platform, private sqlite: SQLiteService, private sqliteWrapper: SqliteWrapperService) {
+    this.initializeSqlite();
   }
 
-  initializeApp() {
+  initializeSqlite() {
     this.platform.ready().then(async () => {
-      this.sqlite.initializePlugin().then(async (ret) => {
-        if (this.sqlite.platform === 'web') {
+      this.sqliteWrapper.initializePlugin().then(async (ret) => {
+        if (this.sqliteWrapper.platform === 'web') {
           this.isWeb = true;
           await customElements.whenDefined('jeep-sqlite');
           const jeepSqliteEl = document.querySelector('jeep-sqlite');
           if (jeepSqliteEl != null) {
-            await this.sqlite.initWebStore();
+            await this.sqliteWrapper.initWebStore();
             console.log(`>>>> isStoreOpen ${await jeepSqliteEl.isStoreOpen()}`);
+            if (!this.sqlite.isConnected$.value) {
+              await this.sqlite.initConnection(this.DATABASE_NAME).then(() => {
+                console.log(`Sqlite is connected to the database: ${this.DATABASE_NAME}`);
+              });
+            }
           } else {
             console.log('>>>> jeepSqliteEl is null');
           }
