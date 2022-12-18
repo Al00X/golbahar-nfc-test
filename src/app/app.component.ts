@@ -12,7 +12,6 @@ export class AppComponent {
   public sqliteLoaded = false;
   constructor(private platform: Platform, private sqlite: SQLiteService) {
     this.initializeApp();
-    // this.sqliteLoaded = true;
   }
 
   initializeApp() {
