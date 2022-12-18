@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div *ngIf="databaseIsReady; else DatabaseLoading">
+  <ng-container *ngIf="databaseIsReady; else DatabaseLoading">
     <table>
       <thead>
         <tr>
@@ -31,30 +31,31 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <form class="mt-8 centered-div" style="gap: 1rem" autocomplete="off">
-    <ion-item>
-      <ion-label>Firstname</ion-label>
-      <ion-input
-        [formControl]="form.controls.firstname"
-        autocomplete="off"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Lastname</ion-label>
-      <ion-input
-        [formControl]="form.controls.lastname"
-        autocomplete="off"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Age</ion-label>
-      <ion-input [formControl]="form.controls.age" type="number"></ion-input>
-    </ion-item>
-    <ion-button [disabled]="saving" (click)="onSaveEntry()" class="mt-8"
-      >Save</ion-button
-    >
-  </form>
+
+    <form class="mt-8 centered-div" style="gap: 1rem" autocomplete="off">
+      <ion-item>
+        <ion-label>Firstname</ion-label>
+        <ion-input
+          [formControl]="form.controls.firstname"
+          autocomplete="off"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lastname</ion-label>
+        <ion-input
+          [formControl]="form.controls.lastname"
+          autocomplete="off"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Age</ion-label>
+        <ion-input [formControl]="form.controls.age" type="number"></ion-input>
+      </ion-item>
+      <ion-button [disabled]="saving" (click)="onSaveEntry()" class="mt-8"
+        >Save</ion-button
+      >
+    </form>
+  </ng-container>
 </ion-content>
 
 <ng-template #DatabaseLoading>
