@@ -56,7 +56,7 @@ export class SqliteComponent {
   }
 
   private async initDb() {
-    this.db = await this.sqlite.retrieveConnection();
+    this.db = await this.sqlite.getOrCreateConnection();
     await this.db.open();
     await this.db.run(SCHEMA_CREATE_DATA_TABLE);
     await this.sqlite.save();

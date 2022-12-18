@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-
 import {SqliteWrapperService} from "./sqlite.wrapper.service";
 import {SQLiteDBConnection} from "@capacitor-community/sqlite";
-import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +8,48 @@ import {BehaviorSubject} from "rxjs";
 export class SQLiteService {
   databaseName?: string;
   connection?: SQLiteDBConnection;
-  isConnected$ = new BehaviorSubject(false);
 
   constructor(private sqlite: SqliteWrapperService) {
   }
 
   async initConnection(dbName: string) {
+    console.log('CREATING CONNECTION')
     this.databaseName = dbName;
-    return this.sqlite.createConnection(dbName, false, 'no-encryption', 1).then((c) => {
-      this.connection = c;
-      this.setIsConnectedState(true);
-    });
+    const connection = await this.sqlite.createConnection(dbName, false, 'no-encryption', 1);
+    this.connection = connection;
+    return connection;
   }
 
   async retrieveConnection() {
+    console.log('RETRIEVING CONNECTION')
     return this.sqlite.retrieveConnection(this.databaseName ?? '');
   }
 
-  async save() {
-    return this.sqlite.saveToStore(this.databaseName ?? '');
+  async isConnected() {
+    return (await this.sqlite.isConnection(this.databaseName ?? '')).result
   }
 
-  private setIsConnectedState(state: boolean) {
-    this.isConnected$.next(state);
+  async getOrCreateConnection(dbName?: string) {
+    const consistent = (await this.sqlite.checkConnectionsConsistency()).result
+    if (dbName) {
+      this.databaseName = dbName;
+    }
+    const isConn = await this.isConnected()
+
+    if (consistent && isConn) {
+      return this.retrieveConnection();
+    } else {
+      return this.initConnection(this.databaseName ?? '');
+    }
+  }
+
+  async closeConnection() {
+    return await this.sqlite.closeAllConnections();
+  }
+
+  async save() {
+    if (this.sqlite.platform === 'web') {
+      return this.sqlite.saveToStore(this.databaseName ?? '');
+    }
   }
 }
